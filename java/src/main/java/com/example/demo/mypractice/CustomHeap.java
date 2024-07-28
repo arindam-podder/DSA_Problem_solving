@@ -1,4 +1,4 @@
-package com.st.code_in_java.problems;
+package com.example.demo.mypractice;
 
 import java.util.ArrayList;
 import java.util.List;

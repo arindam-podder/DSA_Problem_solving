@@ -33,6 +33,8 @@ p contains only lowercase English letters, '?' or '*'.
 
 package com.example.demo.leet_code;
 
+import java.util.Arrays;
+
 public class LC44_WildcardMatching {
 	public static void main(String[] args) {
 		String s = "aaaababbbaaabaabbbbabaababaabbabbaabababbaaaaaaabba";
