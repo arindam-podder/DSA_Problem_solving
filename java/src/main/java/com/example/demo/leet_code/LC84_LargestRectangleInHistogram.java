@@ -36,11 +36,75 @@ public class LC84_LargestRectangleInHistogram {
 //		int[] arr = new int[] {2, 0, 4};
 		int[] arr = {3,5,5,2,5,5,6,6,4,4,1,1,2,5,5,6,6,4,1,3};
 		
-		System.out.println( Arrays.toString( getLeftIdxArr(arr) ));
-		System.out.println( Arrays.toString( getRightIdxArr(arr) ));
+		System.out.println( maxRect(arr));
+		
+		//System.out.println( Arrays.toString( getLeftIdxArr(arr) ));
+		//System.out.println( Arrays.toString( getRightIdxArr(arr) ));
 		
 		System.out.println( largestRectArea(arr) );
 	}
+	
+	
+	//this is same as below 
+	public static int maxRect(int [] histogram) {
+	    int n;
+	    int res = 0;
+	    int prevMin[];
+	    int nextMin[];
+	    int num;
+	    Stack<Integer> stack;
+	    
+	    n = histogram.length;
+	    prevMin = new int[n];
+	    nextMin = new int[n];
+	    
+	    stack = new Stack<Integer>();
+	    
+	    prevMin[0] = -1;
+	    stack.push(0);
+	    for (int i = 1; i < n; i++) {
+	        num = histogram[i];
+	        while (!stack.isEmpty() && num <= histogram[stack.peek()]) {
+	            stack.pop();
+	        }
+	        prevMin[i] = -1;
+	        if (!stack.isEmpty()) {
+	            prevMin[i] = stack.peek();
+	        }
+	        stack.push(i);
+	    }
+
+	    
+	    nextMin[n - 1] = n;
+	    stack.clear();
+	    stack.push(n - 1);
+	    for (int i = n - 2; i >= 0; i--) {
+	        num = histogram[i];
+	        while (!stack.isEmpty() && num <= histogram[stack.peek()]) {
+	            stack.pop();
+	        }
+	        nextMin[i] = n;
+	        if (!stack.isEmpty())
+	            nextMin[i] = stack.peek();
+	        stack.push(i);
+	    }
+	    
+	    for (int i = 0; i < n; i++) {
+	        int left = prevMin[i] + 1;
+	        int right = nextMin[i] - 1;
+	        res = Math.max(res, histogram[i] * (right - left + 1));
+	    }
+	    
+	    return res;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public static int largestRectArea(int[] heights) {
         int result = Integer.MIN_VALUE; 
