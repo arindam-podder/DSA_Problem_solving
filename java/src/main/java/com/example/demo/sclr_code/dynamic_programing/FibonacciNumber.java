@@ -50,7 +50,9 @@ public class FibonacciNumber {
 	public static void main(String[] args) {
 		int[] dpArr = {-1, -1, -1, -1, -1};
 
-		System.out.println(aThFibo(4, dpArr));		
+		System.out.println(aThFibo(4, dpArr));
+		
+		System.out.println( tabulationBottomUp(5) );
 	}
 	
 	public static int aThFibo(int a, int[] dpArr) {
@@ -67,8 +69,34 @@ public class FibonacciNumber {
 		return dpArr[a];
 	}
 	
+	
+	public static int tabulationBottomUp(int a) {
+		int[] dp = new int[a+1];
+		dp[0] = 0;
+		dp[1] = 1; 
+		for(int i=2; i<=a; i++) {
+			dp[i] = dp[i-1] + dp[i-2];
+		}
+		
+		return dp[a];
+	}
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
