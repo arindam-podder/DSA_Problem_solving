@@ -55,7 +55,7 @@ import java.util.Collections;
 
 public class Subset {
 	
-	ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+	ArrayList<ArrayList<Integer>> result = new ArrayList<>();
 
 	public static void main(String[] args) {
 		ArrayList<Integer> list = new ArrayList<>();
@@ -66,18 +66,18 @@ public class Subset {
 		Subset obj = new Subset(); 
 		obj.subsetsUsingRecursion(list, 0, new ArrayList<>());
 		
-		System.out.println(obj.list);
+		System.out.println(obj.result);
 	}
 	
-	public void subsetsUsingRecursion(ArrayList<Integer> arr, int index, ArrayList<Integer> current) {		//not working 
-		if(index >= arr.size()) {
-			this.list.add(current);
+	public void subsetsUsingRecursion(ArrayList<Integer> arr, int index, ArrayList<Integer> current) { 
+		if(index == arr.size()) {
+			this.result.add( new ArrayList<>(current));
 			return;
 		}
 		subsetsUsingRecursion(arr, index+1, current);
 		current.add(arr.get(index));
 		subsetsUsingRecursion(arr, index+1, current);
-		current.remove(arr.size()-1);
+		current.remove(current.size()-1);
 	}
 
 }
