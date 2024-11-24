@@ -21,7 +21,7 @@ package com.example.demo.leet_code;
 
 import java.util.Stack;
 
-public class DecodeString {
+public class LC294_DecodeString {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

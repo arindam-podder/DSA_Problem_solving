@@ -10,11 +10,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class GroupAnagrams {
+public class LC49_GroupAnagrams {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList<ArrayList<String>> resulList = groupAnagram(Arrays.asList("eat","tea","tan","ate","nat","bat"));
+		
+		System.out.println( resulList );
 	}
 	
 	public static ArrayList<ArrayList<String>> groupAnagram(List<String> list){    //leetcode 49		
