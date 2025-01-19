@@ -45,14 +45,10 @@ public class LC72_EditDistance {
 	public static void main(String[] args) {
 		String s1 = "horse"; 
 		String s2 = "ros"; 
-		
 		//System.out.println( minOperationRecurtion(s1.length()-1, s1, s2.length()-1, s2) );
-		
 		//int[][] dp = new int[s1.length()][s2.length()];
 		//for(int[] arr: dp) Arrays.fill(arr, -1);
 		//System.out.println( minOperationMemorization(s1.length()-1, s1, s2.length()-1, s2, dp) );
-		
-	
 		System.out.println( minOperationTabulation(s1, s2) );
 	
 	}
@@ -61,8 +57,8 @@ public class LC72_EditDistance {
         return 0;
     }
 	
+	
 	// TLE 
-
 	public static int minOperationRecurtion(int i, String s1, int j, String s2) {
 		//base case 
 		if(i<0) return j+1;   //i<0 means s1 end , so to make s2 j+1 operation 
@@ -88,7 +84,7 @@ public class LC72_EditDistance {
 		//body logic 
 		if(s1.charAt(i) == s2.charAt(j)) dp[i][j] = 0 + minOperationMemorization(i-1, s1, j-1, s2, dp); 
 		else {
-			int insert = 1 + minOperationMemorization(i, s1, j-1, s2, dp);   //insert hypotheticall on i+1 , so (i+1 and j) match
+			int insert = 1 + minOperationMemorization(i, s1, j-1, s2, dp);   //insert hypothetically on i+1 , so (i+1 and j) match
 			int replace = 1 + minOperationMemorization(i-1, s1, j-1, s2, dp); 
 			int remove = 1 + minOperationMemorization(i-1, s1, j, s2, dp); 
 			dp[i][j] = Math.min(Math.min(insert, replace), remove);
