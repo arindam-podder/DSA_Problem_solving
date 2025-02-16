@@ -38,14 +38,16 @@ import java.util.PriorityQueue;
 public class LC658_FindKClosestElements {
 
 	public static void main(String[] args) {
-		int[] arr = {1,2,3,4,5};
-		int k = 4; 
-		int x= -1;
+		int[] arr = {1,1,1,10,10,10};
+		int k = 1; 
+		int x= 9;
 		
 		System.out.println(findClosest(arr, k, x));
-
+		
+		System.out.println( findClosestUseWindow(arr, k, x) );
 	}
 
+	//using heap 
 	public static List<Integer> findClosest(int[] arr, int k, int x) {
         //max heap 
 		PriorityQueue<PairDiffElement> heap = new PriorityQueue<>(new PairDiffElement(0, 0));
@@ -64,6 +66,31 @@ public class LC658_FindKClosestElements {
 		
 		return ans;
     }
+	
+	
+	public static List<Integer> findClosestUseWindow(int[] arr, int k, int x){
+		//build the window 
+		List<int[]> window = new ArrayList<>();			//{diff, ele}
+		for(int i=0; i<k; i++) {
+			window.add(new int[] { Math.abs(x-arr[i]), arr[i]});
+		}
+		
+		int i=k;
+		while(i<arr.length) {
+			int curDif = Math.abs(x-arr[i]);
+			if(curDif<window.get(0)[0]) {
+				window.add(new int[] {curDif, arr[i]});
+				window.remove(0);
+			}
+			i++;
+		}
+		
+		List<Integer> result = new ArrayList<>();
+		for(int[] a: window) result.add(a[1]);
+		return result;
+	}
+	
+	
 	
 }
 
