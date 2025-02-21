@@ -42,7 +42,9 @@ public class LC60_PermutationSequence {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(kthPermutation(4, 24));
+		System.out.println(kthPermutation(3, 2));
+		
+		//System.out.println( 2/6 );
 	}
 
 	
@@ -61,7 +63,7 @@ public class LC60_PermutationSequence {
 		//play with each index , and each position will ghive cetain number of permutation 
 		String result = "";
 		while(true) {
-			//kth permutation will satrt from a particular index value 
+			//kth permutation will start from a particular index value 
 			int indexToPick = k/fact; 
 			result = result + list.get(indexToPick); 
 			list.remove(indexToPick); 
