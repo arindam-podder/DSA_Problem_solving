@@ -43,6 +43,9 @@ public class LC1143_LongestCommonSubsequence {
 		System.out.println( lCS(s1, s2) );
 		
 		System.out.println( tabulation(s1, s2) );
+		
+		System.out.println( tabulation2(s1, s2) );
+		
 	}
 	
 	
@@ -80,7 +83,7 @@ public class LC1143_LongestCommonSubsequence {
 	}
 	
 	
-	//need to analyse and research 
+	//need to analyse and research (matrix is 0 based so lot if else check is there)
 	public static int tabulation(String s1, String s2) {
 		 int[][] dp = new int[s1.length()][s2.length()];
 		 for(int i=0; i<s1.length(); i++) {
@@ -103,6 +106,23 @@ public class LC1143_LongestCommonSubsequence {
 		 }
 		 return dp[s1.length()-1][s2.length()-1];
 	}
+	
+	
+	//we will use 1 based matrix to solve 
+	public static int tabulation2(String s1, String s2) {
+		int[][] dp = new int[s1.length()+1][s2.length()+1];
+		for(int i=1; i<dp.length; i++) {
+			for(int j=1; j<dp[0].length; j++) {
+				if(s1.charAt(i-1) == s2.charAt(j-1)) {
+					dp[i][j] = 1 + dp[i-1][j-1]; 
+				}else {
+					dp[i][j] = Math.max( dp[i][j-1], dp[i-1][j]);
+				}
+			}
+		}
+		return dp[s1.length()][s2.length()];
+	}
+	
 	
 
 }
