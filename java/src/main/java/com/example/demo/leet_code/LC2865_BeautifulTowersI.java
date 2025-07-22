@@ -42,7 +42,7 @@ public class LC2865_BeautifulTowersI {
 	}
 
 	public long maximumSumOfHeights(int[] heights) {
-        
+        return getMaxSumHeight(heights);
     }
 	
 	
