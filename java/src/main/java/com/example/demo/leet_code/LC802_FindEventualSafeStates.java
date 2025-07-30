@@ -38,21 +38,46 @@ The number of edges in the graph will be in the range [1, 4 * 104].
 
 package com.example.demo.leet_code;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 public class LC802_FindEventualSafeStates {
 
 	public static void main(String[] args) {
+		int[][] graph = { {1,2}, {2,3}, {5}, {0}, {5}, {}, {}} ;
 		
+		System.out.println( safeNodes1(graph) );
 	}
 	
-	public static List<Integer> SafeNodes(int[][] graph) {
-        
+	public static List<Integer> safeNodes1(int[][] graph) {
+        int[] visited = new int[graph.length];
+        TreeSet<Integer> safeNode = new TreeSet<>();
+        for(int vertex=0; vertex<graph.length; vertex++) {
+        	if(visited[vertex] == 0) DFS(vertex, graph, visited, safeNode);
+        }
+		return new ArrayList<>(safeNode);
     }
 	
-	
-	public static boolean DFS(int node, int[][] graph, int[] visited, ) {
+	//vertex with zero outDegree will be base case, and rest recursion will take care , play with safeVetex set also
+	public static boolean DFS(int vertex, int[][] graph, int[] visited, TreeSet<Integer> safeVertex) {
+		visited[vertex] = 1;
+		if(graph[vertex].length == 0) {	//outDegree 0
+			safeVertex.add(vertex);
+			return true;
+		}
 		
+		boolean isSafeNode = true;
+		for(int neighbor: graph[vertex]) {
+			if(visited[neighbor] == 0 && DFS(neighbor, graph, visited, safeVertex)==false) {
+				isSafeNode = false;
+			}
+			else if(visited[neighbor] == 1 && !safeVertex.contains(neighbor)) {
+				isSafeNode = false; 
+			}
+		}
+		if(isSafeNode) safeVertex.add(vertex);
+		return isSafeNode;
 	}
 
 }
