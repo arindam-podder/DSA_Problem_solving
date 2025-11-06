@@ -34,10 +34,13 @@ package com.example.demo.leet_code;
 
 import java.util.*;
 
+import com.example.demo.mypractice.graph.DSU;
+
 public class LC547_NumberOfProvinces {
 
 	public static void main(String[] args) {
-		
+		int[][] isConnected = {{1,1,0}, {1,1,0}, {0,0,1}};		//ans = 2
+		System.out.println( usingDSU(isConnected) );
 	}
 	
 	
@@ -78,7 +81,6 @@ public class LC547_NumberOfProvinces {
 		}
 	}
 	
-	
 	public static void BFS(int node, List<List<Integer>> adjacent, int[] visited) {
 		visited[node] = 1; 
 		Queue<Integer> que = new LinkedList<>();
@@ -94,6 +96,22 @@ public class LC547_NumberOfProvinces {
 			}
 		}
 	}
+	
+	public static int usingDSU(int[][] isConnected) {
+		DSU dsu = new DSU(isConnected.length);
+		for(int i=0; i<isConnected.length; i++) {
+			for(int j=0; j<isConnected[0].length; j++) {
+				if(isConnected[i][j] == 1) dsu.union(i, j);
+			}
+		}
+		
+		int noOfProvinces = 0; 
+		for(int i=0; i<dsu.getParent().length; i++ ) {
+			if(dsu.getParent()[i] == i) noOfProvinces += 1;
+		}
+		return noOfProvinces;
+	}
+	
 
 }
 
