@@ -41,15 +41,35 @@ Explanation 2:
 
 package com.example.demo.sclr_code.dynamic_programing;
 
+import java.util.Arrays;
+
 public class Stairs {
 	
 	public static void main(String[] args) {
 		long[] dpArr = {-1, -1, -1, -1, -1, -1,-1, -1, -1, -1, -1, -1};
 		
-		System.out.println(waysToClimbStair(11, dpArr));
-		
-		System.out.println( tabulationBottomUp(5) );
+		System.out.println("step 2 out put");
+		System.out.println( recursion(11) );
+		System.out.println( waysToClimbStair(11, dpArr));
+		System.out.println( tabulationBottomUp(11) );
  		
+		
+		System.out.println("step 3 out put");
+		int n3 = 5;
+		System.out.println( Stairs3step.recur(n3) );
+		long[] dp = new long[n3+1];
+		Arrays.fill(dp, -1);
+		System.out.println( Stairs3step.dp(n3, dp) );
+		System.out.println( Stairs3step.tabulationBottomUp(n3) );
+		
+	}
+	
+	public static long recursion(int n) {
+//		if(n<3) return n;
+		if(n== 0) return 1; 
+		else if(n<0) return 0;
+		
+		return recursion(n-1) + recursion(n-2); 
 	}
 
 	
@@ -80,6 +100,47 @@ public class Stairs {
 		return dp[numberOfStair];
 	}
 	
+	
+}
+
+/*
+ * now man is on 0, he can take either 1/2/3 step 
+ * example : stairs = 3   ans = 4 
+ *           stairs = 4   ans = 7
+ *           
+ */
+class Stairs3step{
+	
+	public static long recur(int n) {
+		if(n== 0) return 1; 
+		else if(n<0) return 0;
+		
+		return recur(n-1) + recur(n-2) + recur(n-3);
+	}
+	
+	public static long dp(int n, long[] dp) {
+		if(n== 0) return 1; 
+		else if(n<0) return 0; 
+		
+		if(dp[n] != -1) return dp[n]; 
+		
+		dp[n] = dp(n-1, dp) + dp(n-2, dp) + dp(n-3, dp); 
+		
+		return dp[n];
+	}
+	
+	
+	public static int tabulationBottomUp(int n) {
+		int[] dp = new int[n+1];
+		dp[0] = 1; 
+		dp[1] = 1; 
+		dp[2] = 2; 
+		for(int i=3; i<=n; i++) {
+			dp[i] = dp[i-1] + dp[i-2] + dp[i-3];
+		}
+		
+		return dp[n];
+	}
 	
 }
 
