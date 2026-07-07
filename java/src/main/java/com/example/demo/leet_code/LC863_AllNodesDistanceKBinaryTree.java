@@ -114,7 +114,7 @@ public class LC863_AllNodesDistanceKBinaryTree {
     }
     
     
-    public class TreeNode {
+    public static class TreeNode {
     	int val;
     	TreeNode left;
     	TreeNode right;
