@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestCode {
@@ -8,6 +9,7 @@ public class TestCode {
 		// TODO Auto-generated method stub
 
 		Code.subsequenceUseBit(new int[]{1,2,3});
+		Code.subsequenceUseRecur(0, new int[]{1,2,3}, new ArrayList<>());
 		
 	}
 
@@ -31,6 +33,16 @@ class Code{
 	
 	//using recursion 
 	public static void subsequenceUseRecur(int i, int[] arr, List<Integer> cur) {
+		if(i >= arr.length) {
+			System.out.println( cur );
+			return;
+		}
+		//dont pick
+		subsequenceUseRecur(i+1, arr, cur);
+		//pick 
+		cur.add(arr[i]); 
+		subsequenceUseRecur(i+1, arr, cur);
+		cur.remove(cur.size()-1);
 		
 	}
 	

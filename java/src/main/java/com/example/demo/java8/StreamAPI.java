@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import ch.qos.logback.core.filter.Filter;
 
@@ -36,6 +38,7 @@ public class StreamAPI {
 			.reduce((a, b) -> a<b? a:b)
 			.getAsInt();
 		System.out.println( asInt );
+		
 		
 		//find 2nd largest 
 		Integer val = Arrays.stream(arr1)
@@ -67,8 +70,31 @@ public class StreamAPI {
 		System.out.println( collect2 );
 		
 		
+		/*
+		 * Given a string, sort characters based on:
+			• Higher frequency first
+			• If frequency is same → lexicographical order
+		 */
 		
-		List<Integer> list = Arrays.asList(12, 4, 77, 6, 37);
+		String  higherfrequencySorted = s.chars()
+			.mapToObj(e -> (char) e)
+			//.collect(Collectors.groupingBy(e-> e, Collectors.counting()))   //or 
+			.collect(Collectors.toMap(c -> c, c -> 1L, (a, b) -> a+b))
+			.entrySet()
+			.stream()
+			.sorted( (e1, e2) -> {
+					if(e1.getValue() > e2.getValue()) return -1; 
+					else if(e1.getValue() < e2.getValue()) return 1; 
+					else {
+						return e1.getKey().compareTo(e2.getKey());
+					}
+				})
+			.flatMap(e -> Stream.generate(() -> e.getKey()).limit(e.getValue()))
+			.map(c -> String.valueOf(c))
+			.collect(Collectors.joining());
+			
+			
+		System.out.println(higherfrequencySorted);		//ooyyceilmnrtuv
 		
 	}
 	
