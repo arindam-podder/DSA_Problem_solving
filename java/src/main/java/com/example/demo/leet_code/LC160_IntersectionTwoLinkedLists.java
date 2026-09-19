@@ -60,15 +60,36 @@ intersectVal == listA[skipA] == listB[skipB] if listA and listB intersect.
 
 package com.example.demo.leet_code;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class LC160_IntersectionTwoLinkedLists {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 	}
-	
+
+	//keep all node of one LL in a set ,Check for all node in headB LL,  if intersection present then node will already be in set
     public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        Set<ListNode> set = new HashSet<>(); 
+        ListNode p1 = headA; 
+        ListNode p2 = headB; 
         
+        while(p1!=null)  {
+        	set.add(p1); 
+        	p1 = p1.next; 
+        }
+        
+        //check headB ll intersecting or not
+        while(p2 != null) {
+        	if(set.contains(p2)) {
+        		return p2;
+        	}
+        	p2 = p2.next;
+        }
+        
+    	return null;
     }
     
     static class ListNode {
