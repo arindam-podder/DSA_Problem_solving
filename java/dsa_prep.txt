@@ -35,5 +35,6 @@ DSA Preparation Roadmap (From Zero to Interview Ready)
 
 # make me thing twice 
 410. Split Array Largest Sum
+774. Minimize Max Distance of Adjacent Gas Stations ?
 
 
