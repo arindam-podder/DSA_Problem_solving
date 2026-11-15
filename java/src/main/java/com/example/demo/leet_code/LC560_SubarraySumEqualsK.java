@@ -31,12 +31,16 @@ public class LC560_SubarraySumEqualsK {
 	}
 	
 	public int subarraySum(int[] nums, int k) {
-         return totalSubrraysWithSumK(nums, k);
+         return totalSubrraysWithSumK1(nums, k);
     }
 	
+	/*
+	 * //using variable size window, keep increasing window till u get k , then shgrink the window once sum exceed k  
+	 * Not possible when input can have negative values also
+	 */
 	
 	//use prefix sum(here kind of carry sum) with map<prefixsum, count>
-	public static int totalSubrraysWithSumK(int[] arr, int k) {
+	public static int totalSubrraysWithSumK1(int[] arr, int k) {
 		int result = 0; 
 		int carrySum = 0; 
 		Map<Integer, Integer> map = new HashMap<>(); 
@@ -53,6 +57,7 @@ public class LC560_SubarraySumEqualsK {
 		}
 		return result;
 	}
+	
 	
 }
  
